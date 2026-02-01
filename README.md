@@ -1,70 +1,144 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Placement Portal – Frontend
 
-## Available Scripts
+Frontend application for the Placement Portal, built using React (JavaScript) and styled with Tailwind CSS, strictly aligned with an already completed and hardened backend.
 
-In the project directory, you can run:
+This project consumes backend APIs and does not replicate business logic on the client.
 
-### `npm start`
+## 🚀 Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React** (JavaScript)
+- **React Router v6**
+- **Axios**
+- **Tailwind CSS**
+- **Context API** (authentication only)
+- **Backend**: Node.js, Express, MongoDB (already completed)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🎯 Project Philosophy
 
-### `npm test`
+**Backend is the single source of truth**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Frontend focuses on:
+- UX
+- Role-based navigation
+- Data presentation
 
-### `npm run build`
+**All critical rules are enforced by backend APIs**
+- Frontend never assumes permissions or eligibility
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🔐 Authentication & Authorization
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**JWT-based authentication**
+- Access token (short-lived)
+- Refresh token (handled by backend)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Role-based access control:**
+- ADMIN
+- OFFICER
+- RECRUITER
+- STUDENT
 
-### `npm run eject`
+**Implementation:**
+- Frontend implements route guards
+- Backend validates every request
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🧠 Core Roles & Views
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Student
+- View eligible jobs
+- Apply / withdraw applications
+- Track application status
+- Placement status visibility
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Recruiter
+- Manage company jobs
+- View applications per job
+- Update application status (own jobs only)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Officer / Admin
+- Global dashboards
+- Placement analytics
+- Student & recruiter overview
 
-## Learn More
+## 📁 Folder Structure (Planned)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+src/
+│
+├── api/              # Axios instance & API calls
+├── auth/             # Auth context & route guards
+├── routes/           # Role-based routing
+├── dashboards/       # Role-specific dashboards
+│   ├── student/
+│   ├── recruiter/
+│   └── officer/
+│
+├── pages/            # Auth & error pages
+├── components/       # Reusable UI components
+│
+├── App.js
+├── index.js
+└── index.css
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Structure will be expanded incrementally as features are added.**
 
-### Code Splitting
+## 🎨 Styling – Tailwind CSS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project uses Tailwind CSS for styling.
 
-### Analyzing the Bundle Size
+- Utility-first approach
+- No custom CSS unless required
+- Focus on:
+  - Layout consistency
+  - Responsive design
+  - Clean dashboards
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Tailwind will be introduced gradually, starting with layout and spacing utilities.
+No advanced Tailwind knowledge is required upfront.
 
-### Making a Progressive Web App
+## 📊 Data Handling
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- API calls via Axios
+- No frontend data duplication
+- No client-side analytics calculations
+- Aggregated data is rendered as received from backend
 
-### Advanced Configuration
+## ⚠️ Important Constraints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- No business logic duplication
+- No role assumptions on frontend
+- No eligibility checks on client
+- Backend errors are handled gracefully and surfaced to UI
 
-### Deployment
+## 🧩 State Management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- **Context API** → Authentication state
+- **Local component state** → UI state
+- Redux Toolkit will be introduced only if required, with a refresher beforehand
 
-### `npm run build` fails to minify
+## 🛠️ Setup Instructions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm install
+npm start
+```
+
+Runs the app in development mode at: `http://localhost:3000`
+
+## 🔄 Development Approach
+
+Development roadmap (incremental commits):
+1. Authentication flow
+2. Role-based routing
+3. Student dashboard
+4. Recruiter dashboard
+5. Officer analytics
+6. UI refinement
+
+
+## 🤝 Contribution & Notes
+
+This project is built as a backend-first system.
+
+Frontend decisions are made only to support backend behavior and improve user experience.
