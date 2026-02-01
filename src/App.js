@@ -1,9 +1,12 @@
+import Layout from "./components/layouts/Layout";
+import AppRoutes from "./routes/AppRoutes";
+
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Layout>
+      <AppRoutes/>
+    </Layout>
   );
 }
 
