@@ -2,7 +2,7 @@
 
 const NotFound = () => {
   return (
-    <div>
+    <div className="text-center my-auto py-3">
         <h2 className="text-2xl font-bold text-red-600 mb-2">
             404 - Page Not Found
         </h2>

@@ -2,13 +2,52 @@ import { Routes, Route } from "react-router-dom"
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import NotFound from "../pages/NotFound"
+import Unauthorized from "../pages/Unauthorized"
+import Dashboard from "../pages/Dashboard"
+
+import StudentDashboard from "../pages/student/StudentDashboard"
+import OfficerDashboard from "../pages/officer/OfficerDashboard"
+import RecruiterDashboard from "../pages/recruiter/RecruiterDashboard"
+
+import RequireAuth from "../auth/RequireAuth"
+import RequireRole from "../auth/RequireRole"
 
 const AppRoutes = () => {
   return (
     <Routes>
-        <Route path="/" element={<Home/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="*" element={<NotFound/>} />
+
+      {/* Public Routes */}
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+
+      {/* Protected Routes */}
+      <Route element={<RequireAuth />}>
+
+        <Route path="/dashboard" element={<Dashboard/>}/>
+
+        {/* <Route element={<RequireRole allowedRoles={["STUDENT"]} />}>
+          <Route path="/student/dashboard" element={<StudentDashboard />} />
+        </Route> */}
+        <Route path="student" element={<RequireRole allowedRoles={["STUDENT"]} />}>
+          <Route index element={<StudentDashboard />} />
+          <Route path="dashboard" element={<StudentDashboard />} />
+        </Route>
+
+        <Route path="recruiter" element={<RequireRole allowedRoles={["RECRUITER"]} />}>
+          <Route index element={<RecruiterDashboard />} />
+          <Route path="dashboard" element={<RecruiterDashboard />} />
+        </Route>
+
+        <Route path="officer" element={<RequireRole allowedRoles={["OFFICER"]} />}>
+          <Route index element={<OfficerDashboard />} />
+          <Route path="dashboard" element={<OfficerDashboard />} />
+        </Route>
+
+      </Route>
+
+      {/* Error/Fallback Routes */}
+      <Route path="/unauthorized" element={<Unauthorized />}/>
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }
