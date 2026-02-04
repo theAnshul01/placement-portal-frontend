@@ -200,7 +200,7 @@ const RecruiterSignup = () => {
 
                         {/* ======== sign up button ===== */}
                         <button className="w-full py-2 mt-4 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
-                        type="submit"
+                            type="submit"
                         >
                             {isSubmitting ? "Submitting..." : "Sign up"}
                         </button>

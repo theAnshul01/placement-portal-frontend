@@ -13,6 +13,7 @@ import RequireAuth from "../auth/RequireAuth"
 import RequireRole from "../auth/RequireRole"
 import LoginPolicy from "../pages/LoginPolicy"
 import RecruiterSignup from "../pages/recruiter/RecruiterSignup"
+import JobPage from "../pages/JobPage"
 
 const AppRoutes = () => {
   return (
@@ -46,6 +47,8 @@ const AppRoutes = () => {
           <Route index element={<OfficerDashboard />} />
           <Route path="dashboard" element={<OfficerDashboard />} />
         </Route>
+
+        <Route path="jobs" element={<JobPage/>} />
 
       </Route>
 
