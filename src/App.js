@@ -5,7 +5,9 @@ import AppRoutes from "./routes/AppRoutes";
 function App() {
   return (
     <Layout>
+      <div className="font-merriweather">
       <AppRoutes/>
+      </div>
     </Layout>
   );
 }

@@ -1,0 +1,37 @@
+import { Link } from "react-router-dom"
+
+const Footer = () => {
+  return (
+    <footer className='w-full mt-2 rounded-tl-md rounded-tr-md bg-white border-t border-gray-200'>
+
+        {/* Inner container */}
+        <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col md:flex-row items-center justify-between gap-4" >
+
+            {/* Left section */}
+            <p className="text-sm text-gray-600">
+                &copy; {new Date().getFullYear()} Placement Portal. All rights reserved.
+            </p>
+
+            {/* Right section */}
+            <div className='flex gap-6 text-sm text-gray-600'>
+                  <Link to="" className="hover:text-gray-900 hover:underline transition">
+                      Privacy Policy
+                  </Link>
+
+                  {/* Footer link */}
+                  <Link to="" className="hover:text-gray-900 hover:underline transition">
+                      Terms of Service
+                  </Link>
+
+                  {/* Footer link */}
+                  <Link to="" className="hover:text-gray-900 hover:underline transition">
+                      Contact
+                  </Link>
+            </div>
+        </div>
+
+    </footer>
+  )
+}
+
+export default Footer

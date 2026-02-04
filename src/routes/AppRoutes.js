@@ -11,6 +11,8 @@ import RecruiterDashboard from "../pages/recruiter/RecruiterDashboard"
 
 import RequireAuth from "../auth/RequireAuth"
 import RequireRole from "../auth/RequireRole"
+import LoginPolicy from "../pages/LoginPolicy"
+import RecruiterSignup from "../pages/recruiter/RecruiterSignup"
 
 const AppRoutes = () => {
   return (
@@ -19,6 +21,8 @@ const AppRoutes = () => {
       {/* Public Routes */}
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/loginpolicy" element={<LoginPolicy />} />
+      <Route path="/recruiter-registration" element={<RecruiterSignup/>} />
 
       {/* Protected Routes */}
       <Route element={<RequireAuth />}>
