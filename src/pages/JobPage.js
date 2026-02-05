@@ -23,10 +23,10 @@ const JobPage = () => {
     const handleGoBack = () => navigate(-1)
 
   return (
-    <div className="bg-gray-50 p-5">
-        <h1 className="text-gray-900 font-fraunces text-3xl font-semibold">Active Job Drives</h1>
-        <button onClick={handleGoBack} className="text-sm"> &larr; Go Back</button>
-        <ul className="bg-white p-5 rounded-xl ">
+    <div className="bg-gray-50 p-5 dark:bg-gray-900">
+        <h1 className="text-gray-900 font-fraunces text-3xl font-semibold dark:text-gray-100">Active Job Drives</h1>
+        <button onClick={handleGoBack} className="text-sm dark:text-gray-100"> &larr; Go Back</button>
+        <ul className="bg-white p-5 rounded-xl">
             {jobList.map((job, index) => <li key={job._id}>{index+1} -  {job.companyName} - {job.title} - {job.status}</li>)}
         </ul>
     </div>

@@ -21,3 +21,21 @@
     animation: fadeIn 0.2s ease-out;
 }
 
+@layer components {
+    .dark-btn {
+        @apply bg-blue-600 text-white
+    }
+
+    .dark-btn:hover {
+        @apply bg-blue-700
+    }
+
+    .dark .dark-btn {
+        @apply bg-gray-600 text-gray-100
+    }
+
+    .dark .dark-btn:hover {
+        @apply bg-gray-800 text-gray-50
+    }
+}
+

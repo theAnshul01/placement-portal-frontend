@@ -49,16 +49,16 @@ const Login = () => {
       />
 
       {/* Page wrapper */}
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-6 dark:bg-gray-900 dark:border-gray-700">
         {/* Login card container */}
-        <div className="bg-white w-full max-w-md p-8 rounded-xl shadow-md">
+        <div className="bg-white w-full max-w-md p-8 rounded-xl shadow-md dark:bg-gray-600">
           {/* Heading */}
-          <h2 className="text-2xl font-bold text-gray-900 text-center">
+          <h2 className="text-2xl font-bold text-gray-900 text-center dark:text-gray-100">
             Login to Placement Portal
           </h2>
 
           {/* subtitle */}
-          <p className="mt-2 text-sm text-gray-600 text-center">
+          <p className="mt-2 text-sm text-gray-600 text-center dark:text-gray-200">
             Access your dashboard using your credentials
           </p>
 
@@ -67,11 +67,11 @@ const Login = () => {
 
             {/* ========== Email field ========= */}
             <div>
-              <label className="block text-sm font-medium text-gray-700" htmlFor="email">Email Address<span className="text-red-600">*</span></label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-200" htmlFor="email">Email Address<span className="text-red-600 dark:text-red-500">*</span></label>
               <input
                 type="email"
                 placeholder="you@college.edu"
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                 id="email"
                 value={email}
                 onChange={(e) => { setEmail(e.target.value) }}
@@ -85,9 +85,9 @@ const Login = () => {
             <div>
               <div className="flex gap-2">
                 <label
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-700 dark:text-gray-200"
                   htmlFor="password">
-                  Password<span className="text-red-600">*</span>
+                  Password<span className="text-red-600 dark:text-red-500">*</span>
                 </label>
                 <button
                   type="button"
@@ -95,7 +95,7 @@ const Login = () => {
                   className="
                 flex items-center
                 text-sm font-light
-               text-gray-600 hover:text-gray-900"
+               text-gray-600 hover:text-gray-900 dark:text-gray-200"
                 >
                   {showPassword ? "🙈(hide)" : "👁️(show)"}
                 </button>
@@ -103,7 +103,7 @@ const Login = () => {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
-                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                 id="password"
                 value={password}
                 onChange={(e) => { setPassword(e.target.value) }}
@@ -116,22 +116,22 @@ const Login = () => {
             {/* ==== Login Button ==== */}
             <button
               type="submit"
-              className="w-full py-2 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+              className="w-full py-2 rounded-md font-medium dark-btn dark:bg-slate-500 dark:hover:bg-gray-400 transition"
             >
               {submitting ? "Logging in..." : "Login"}
             </button>
           </form>
 
           {/* Footer Links */}
-          <div className="mt-6 text-center text-sm text-gray-600">
+          <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-200">
             <p>
               Forgot your password?{" "}
-              <Link to="/loginpolicy" className="text-blue-600 hover:underline">
+              <Link to="/loginpolicy" className="text-blue-600 hover:underline dark:text-blue-400">
                 Reset here
               </Link>
             </p>
 
-            <p className="mt-1">Don't have an account?{" "} <Link to="/loginpolicy" className=" text-blue-600 hover:underline">Register yourself</Link>.</p>
+            <p className="mt-1">Don't have an account?{" "} <Link to="/loginpolicy" className=" text-blue-600 hover:underline dark:text-blue-400">Register yourself</Link>.</p>
           </div>
 
         </div>

@@ -15,7 +15,7 @@ const SessionExpiredBanner = () => {
     }
 
     return (
-        <div className="fixed top-1 inset-x-1 z-50 bg-red-50 text-red-500 border border-red-500 rounded px-6 py-5 flex items-center justify-between">
+        <div className="fixed top-1 inset-x-1 z-50 bg-red-50 text-red-500 border border-red-500 rounded px-6 py-5 flex items-center justify-between dark:bg-red-600 dark:text-gray-50">
             <p className="text-sm font-medium">
                 Your session has expired. Please login again.
             </p>

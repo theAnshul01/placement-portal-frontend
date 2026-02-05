@@ -60,10 +60,10 @@ const RecruiterSignup = () => {
             onClose={() => {setError(null)}}
             />
 
-            <div className="min-h-screen flex items-center justify-center px-6 mt-2 py-3 bg-gray-50">
-                <div className="bg-white max-w-2xl w-full p-8 rounded-lg shadow-md">
+            <div className="min-h-screen flex items-center justify-center px-6 mt-2 py-3 bg-gray-50 dark:bg-gray-900">
+                <div className="bg-white max-w-2xl w-full p-8 rounded-lg shadow-md dark:bg-gray-600">
                     {/* heading */}
-                    <h1 className="text-3xl font-bold text-gray-900 text-center">Recruiter Registration</h1>
+                    <h1 className="text-3xl font-bold text-gray-900 text-center dark:text-gray-100">Recruiter Registration</h1>
                     {/* Subtitle */}
                     <p className="mt-2 text-sm text-center text-gray-600">
                         Complete the registration to take part in the institution’s campus placement process.
@@ -72,12 +72,12 @@ const RecruiterSignup = () => {
                     <form className="mt-3" onSubmit={handleSignUp}>
                         {/* ======= Name ========= */}
                         <div>
-                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 px-1">Full Name<span className="text-red-600">*</span></label>
+                            <label htmlFor="name" className="block text-sm font-medium text-gray-700 px-1 dark:text-gray-100">Full Name<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="text"
                                 id="name"
                                 placeholder="Enter Full Name"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={fullName}
                                 onChange={(e) => setFullName(e.target.value)}
@@ -86,12 +86,12 @@ const RecruiterSignup = () => {
 
                         {/* ======= Email ========= */}
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 px-1 mt-1">Email address<span className="text-red-600">*</span></label>
+                            <label htmlFor="email" className="block text-sm font-medium text-gray-700 px-1 mt-1 dark:text-gray-100">Email address<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="email"
                                 id="email"
                                 placeholder="Enter Full Name"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
@@ -100,12 +100,12 @@ const RecruiterSignup = () => {
 
                         {/* ======= Password ========= */}
                         <div>
-                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 px-1 mt-1">Password<span className="text-red-600">*</span></label>
+                            <label htmlFor="password" className="block text-sm font-medium text-gray-700 px-1 mt-1 dark:text-gray-100">Password<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="password"
                                 id="password"
                                 placeholder="Enter Strong Password"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
@@ -114,12 +114,12 @@ const RecruiterSignup = () => {
 
                         {/* ======= Company Name ========= */}
                         <div>
-                            <label htmlFor="company" className="block text-sm font-medium text-gray-700 px-1 mt-1">Company Name<span className="text-red-600">*</span></label>
+                            <label htmlFor="company" className="block text-sm font-medium text-gray-700 px-1 mt-1 dark:text-gray-100">Company Name<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="text"
                                 id="company"
                                 placeholder="Enter Company Name"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
@@ -128,14 +128,14 @@ const RecruiterSignup = () => {
 
                         {/* ======= Recruiting Year ========= */}
                         <div>
-                            <label htmlFor="year" className="block text-sm font-medium text-gray-700 px-1 mt-1">Recruiting Year<span className="text-red-600">*</span></label>
+                            <label htmlFor="year" className="block text-sm font-medium text-gray-700 px-1 mt-1 dark:text-gray-100">Recruiting Year<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="number"
                                 id="year"
                                 min="2000"
                                 max="2100"
                                 placeholder="Enter Recruiting Year (YYYY)"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={recruitingYear}
                                 onChange={(e) => setRecruitingYear(e.target.value)}
@@ -144,12 +144,12 @@ const RecruiterSignup = () => {
 
                         {/* ======= Company Website ========= */}
                         <div>
-                            <label htmlFor="website" className="block text-sm font-medium text-gray-700 px-1 mt-1">Company Website<span className="text-red-600">*</span></label>
+                            <label htmlFor="website" className="block text-sm font-medium text-gray-700 px-1 mt-1 dark:text-gray-100">Company Website<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="url"
                                 id="website"
                                 placeholder="https://company.com"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={companyWebsite}
                                 onChange={(e) => setCompanyWebsite(e.target.value)}
@@ -158,12 +158,12 @@ const RecruiterSignup = () => {
 
                         {/* ======= Contact Person ========= */}
                         <div>
-                            <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 px-1 mt-1">Contact Person Full Name<span className="text-red-600">*</span></label>
+                            <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 px-1 mt-1 dark:text-gray-100">Contact Person Full Name<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="text"
                                 id="contact-name"
                                 placeholder="Enter Contact Person Full Name"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={contactPerson}
                                 onChange={(e) => setContactPerson(e.target.value)}
@@ -172,12 +172,12 @@ const RecruiterSignup = () => {
 
                         {/* ======= Contact Person Email ========= */}
                         <div>
-                            <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 px-1 mt-1">Contact Person Email<span className="text-red-600">*</span></label>
+                            <label htmlFor="contact-email" className="block text-sm font-medium text-gray-700 px-1 mt-1 dark:text-gray-100">Contact Person Email<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="email"
                                 id="contact-email"
                                 placeholder="Enter Contact Person Email Address"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={contactEmail}
                                 onChange={(e) => setContactEmail(e.target.value)}
@@ -186,12 +186,12 @@ const RecruiterSignup = () => {
 
                         {/* ======= Contact Person Phone Number ========= */}
                         <div>
-                            <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-700 px-1 mt-1">Contact Person Phone<span className="text-red-600">*</span></label>
+                            <label htmlFor="contact-phone" className="block text-sm font-medium text-gray-700 px-1 mt-1 dark:text-gray-100">Contact Person Phone<span className="text-red-600 dark:text-red-500">*</span></label>
                             <input
                                 type="tel"
                                 id="contact-phone"
                                 placeholder="Enter Contact Person Phone Number"
-                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500"
+                                className="mt-1 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300"
                                 required
                                 value={contactPhone}
                                 onChange={(e) => {setContactPhone(e.target.value)}}
@@ -199,21 +199,21 @@ const RecruiterSignup = () => {
                         </div>
 
                         {/* ======== sign up button ===== */}
-                        <button className="w-full py-2 mt-4 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition"
+                        <button className="w-full py-2 mt-4 rounded-md bg-blue-600 text-white font-medium hover:bg-blue-700 transition dark:bg-slate-500 dark:hover:bg-gray-400"
                             type="submit"
                         >
                             {isSubmitting ? "Submitting..." : "Sign up"}
                         </button>
                     </form>
 
-                    <p className="text-sm mt-2"><span className="font-medium">Note:</span> All recruiter accounts require placement cell approval. <Link to="/loginpolicy" className="text-blue-600 hover:underline">See Recruiter Registration Policy</Link></p>
+                    <p className="text-sm mt-2 dark:text-gray-100"><span className="font-medium">Note:</span> All recruiter accounts require placement cell approval. <Link to="/loginpolicy" className="text-blue-600 hover:underline dark:text-blue-400">See Recruiter Registration Policy</Link></p>
 
                     {/* ======== Footer Links ========= */}
-                    <div className="mt-6 text-center text-sm text-gray-600">
+                    <div className="mt-6 text-center text-sm text-gray-600 dark:text-gray-100">
 
                         
 
-                        <p className="mt-1">Already registered?{" "} <Link to="/login" className=" text-blue-600 hover:underline">Sign in here</Link>.</p>
+                        <p className="mt-1">Already registered?{" "} <Link to="/login" className=" text-blue-600 hover:underline dark:text-blue-400">Sign in here</Link>.</p>
                     </div>
 
                 </div>
