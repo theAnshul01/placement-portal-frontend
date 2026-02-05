@@ -4,6 +4,8 @@ import { getRedirectPathByRole } from "../auth/roleRedirectMap"
 import Navbar from "../components/Navbar"
 import { useState } from "react"
 import ErrorStrip from "../components/ErrorStrip"
+import { FaRegEyeSlash } from "react-icons/fa6";
+import { FaRegEye } from "react-icons/fa6";
 
 
 const Login = () => {
@@ -97,7 +99,7 @@ const Login = () => {
                 text-sm font-light
                text-gray-600 hover:text-gray-900 dark:text-gray-200"
                 >
-                  {showPassword ? "🙈(hide)" : "👁️(show)"}
+                  {showPassword ? <FaRegEyeSlash/> : <FaRegEye/>}
                 </button>
               </div>
               <input
