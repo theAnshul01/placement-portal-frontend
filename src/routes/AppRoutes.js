@@ -14,6 +14,7 @@ import RequireRole from "../auth/RequireRole"
 import LoginPolicy from "../pages/LoginPolicy"
 import RecruiterSignup from "../pages/recruiter/RecruiterSignup"
 import JobPage from "../pages/JobPage"
+import StudentAccount from "../pages/officer/StudentAccount"
 
 const AppRoutes = () => {
   return (
@@ -46,6 +47,7 @@ const AppRoutes = () => {
         <Route path="officer" element={<RequireRole allowedRoles={["OFFICER"]} />}>
           <Route index element={<OfficerDashboard />} />
           <Route path="dashboard" element={<OfficerDashboard />} />
+          <Route path="create-student-account" element={<StudentAccount/>} />
         </Route>
 
         <Route path="jobs" element={<JobPage/>} />

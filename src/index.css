@@ -35,7 +35,35 @@
     }
 
     .dark .dark-btn:hover {
-        @apply bg-gray-800 text-gray-50
+        @apply bg-gray-500 text-gray-50
+    }  
+
+    .select-field {
+        @apply mt-1 w-full rounded-md px-1 py-2 bg-white dark:text-gray-300 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-600
+    }
+
+    .btn {
+        @apply px-3 py-2 rounded-md
     }
 }
 
+@layer base {
+
+    /* Chrome, Edge, Safari */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    /* Firefox */
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+}
+
+/* @layer base {
+    input[type="number"] {
+        color-scheme: light dark;
+    }
+} */
