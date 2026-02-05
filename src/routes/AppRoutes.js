@@ -15,6 +15,7 @@ import LoginPolicy from "../pages/LoginPolicy"
 import RecruiterSignup from "../pages/recruiter/RecruiterSignup"
 import JobPage from "../pages/JobPage"
 import StudentAccount from "../pages/officer/StudentAccount"
+import BulkStudentUpload from "../pages/officer/BulkStudentUpload"
 
 const AppRoutes = () => {
   return (
@@ -48,6 +49,7 @@ const AppRoutes = () => {
           <Route index element={<OfficerDashboard />} />
           <Route path="dashboard" element={<OfficerDashboard />} />
           <Route path="create-student-account" element={<StudentAccount/>} />
+          <Route path="bulk-upload" element={<BulkStudentUpload/>} />
         </Route>
 
         <Route path="jobs" element={<JobPage/>} />

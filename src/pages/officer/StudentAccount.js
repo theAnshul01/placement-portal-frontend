@@ -50,7 +50,7 @@ const StudentAccount = () => {
                 onClose={()=>{setError("")}}
             />
             <div className="min-h-screen flex items-center justify-center text-gray-700 dark:text-gray-100">
-                <div className="px-6 py-4 w-full max-w-md rounded-md bg-white dark:bg-gray-700">
+                <div className="px-6 py-4 w-full max-w-xl rounded-md bg-white dark:bg-gray-700">
                     <h1 className="text-center my-3 mx-2 text-2xl font-medium">Create Student Account</h1>
                     <form className="mt-8 space-y-5" onSubmit={handleSubmit}>
 
