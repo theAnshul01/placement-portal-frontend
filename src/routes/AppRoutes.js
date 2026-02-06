@@ -16,6 +16,9 @@ import RecruiterSignup from "../pages/recruiter/RecruiterSignup"
 import JobPage from "../pages/JobPage"
 import StudentAccount from "../pages/officer/StudentAccount"
 import BulkStudentUpload from "../pages/officer/BulkStudentUpload"
+import RecruiterList from "../pages/officer/RecruiterList"
+import PasswordResetEmail from "../pages/officer/PasswordResetEmail"
+import VerifyRecruiter from "../pages/officer/VerifyRecruiter"
 
 const AppRoutes = () => {
   return (
@@ -53,6 +56,12 @@ const AppRoutes = () => {
         </Route>
 
         <Route path="jobs" element={<JobPage/>} />
+
+        <Route path="officer" element={<RequireRole allowedRoles={["OFFICER", "ADMIN"]} />}>
+          <Route path="recruiter-verification" element={<RecruiterList/>} />
+          <Route path="password-reset-email" element={<PasswordResetEmail/>} />
+          <Route path="verify-recruiter" element={<VerifyRecruiter/>} />
+        </Route>
 
       </Route>
 

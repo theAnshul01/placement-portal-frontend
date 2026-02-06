@@ -1,8 +1,11 @@
 import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { Link } from "react-router-dom"
+import useAuth from "../auth/useAuth"
 
 const Home = () => {
+  const {user} = useAuth()
+
   return (
     <>
       {/* Sticky Top Navigation bar */}
@@ -28,12 +31,12 @@ const Home = () => {
           <div className="mt-10 flex justify-center gap-4">
             
             {/* Primary CTA button */}
-            <Link
+            {!user && <Link
               to="/login"
               className="px-6 py-3 rounded-md font-medium dark-btn transition"
             >
               Login to Portal
-            </Link>
+            </Link>}
 
             {/* Secondary CTA button */}
             <Link
@@ -97,7 +100,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ============= CTA SECTION ============= */}
+        {/* ============= CTA SECTION ============= */}  // TODO: CTA section to be different if user is already logged in
         <section className="py-20 text-center">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
             Ready to Get Started?

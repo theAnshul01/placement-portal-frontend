@@ -5,8 +5,6 @@ import { useNavigate } from "react-router-dom"
 import { fetchPlacementStats, fetchOpenJobs, fetchPendingRecruiters } from "../../services/OfficerService"
 import { useEffect, useState } from "react"
 
-import { notifySessionExpired } from "../../context/SessionContext"
-
 const OfficerDashboard = () => {
   const [stats, setStats] = useState(null)
   const [pendingRecruiters, setPendingRecruiters] = useState([])
@@ -87,7 +85,8 @@ const OfficerDashboard = () => {
             <div className="lg:col-span-2">
               <div className="rounded-lg bg-white p-6 min-h-48 dark:bg-gray-700 dark:border-gray-600">
 
-                <h1 className="font-semibold mb-3 text-gray-100">Recruiters Verification Pending</h1>
+                <h1 className="font-semibold text-gray-700 dark:text-gray-100 mb-3">Recruiters Verification Pending - <span className="text-gray-600 text-sm dark:text-gray-200 font-medium">{new Date().getFullYear()}</span></h1>
+                
                 <div className="space-y-2">
                   {loading && <p className="text-gray-500 dark:text-gray-200">Loading...</p>}
                   {!loading && recruitersContent.length === 0 && (
@@ -99,7 +98,7 @@ const OfficerDashboard = () => {
                 </div>
               </div>
               <div className="mt-4 rounded-lg bg-white p-6 min-h-48 dark:bg-gray-700 dark:border-gray-600">
-                <h1 className="font-semibold mb-3 dark:text-gray-100">Job drives with deadline as: {format(new Date(), "dd-MMM-yyyy")}</h1>
+                <h1 className="font-semibold mb-3 dark:text-gray-100">Job drives with deadline as: <span className="text-sm font-medium">{format(new Date(), "dd-MMM-yyyy")}</span></h1>
                 <div className="space-y-2">
                   {loading && <p className="text-gray-500 dark:text-gray-200">Loading...</p>}
                   {!loading && jobsContent.length === 0 && (
@@ -114,8 +113,10 @@ const OfficerDashboard = () => {
             <div className="bg-white rounded-lg p-6 min-h-96 dark:bg-gray-700 dark:border-gray-600">
               <h1 className="font-semibold dark:text-gray-100">Quick Actions</h1>
               <div className="mt-4 space-y-3">
-                <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900">
-                  Review Recruiter Requests
+                <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900"
+                  onClick={() => navigate("recruiter-verification")}
+                >
+                  Recruiters List
                 </button>
 
                 <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900"
@@ -124,7 +125,7 @@ const OfficerDashboard = () => {
                 </button>
 
                 <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900">
-                  Placement Statistics
+                  Placement Statistics  // TODO: to link with the admin view of placement stats
                 </button>
                 <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900" onClick={() => navigate("create-student-account")}>
                   Create Student Account
@@ -132,10 +133,12 @@ const OfficerDashboard = () => {
                 <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900 flex items-center justify-center" onClick={() => navigate("bulk-upload")}>
                   Students Account Creation - Bulk upload
                 </button>
-                <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900" onClick={notifySessionExpired}>
-                  Force Session Expire
+                <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900 flex items-center justify-center" onClick={() => navigate("verify-recruiter")}>
+                  Verify Recruiter
                 </button>
-                
+                <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900 flex items-center justify-center" onClick={()=> navigate("password-reset-email")}>
+                  Send Password Reset Email
+                </button>
               </div>
             </div>
           </div>
