@@ -19,6 +19,8 @@ import BulkStudentUpload from "../pages/officer/BulkStudentUpload"
 import RecruiterList from "../pages/officer/RecruiterList"
 import PasswordResetEmail from "../pages/officer/PasswordResetEmail"
 import VerifyRecruiter from "../pages/officer/VerifyRecruiter"
+import Applyjob from "../pages/student/Applyjob"
+import JobDetails from "../pages/student/JobDetails"
 
 const AppRoutes = () => {
   return (
@@ -35,12 +37,11 @@ const AppRoutes = () => {
 
         <Route path="/dashboard" element={<Dashboard/>}/>
 
-        {/* <Route element={<RequireRole allowedRoles={["STUDENT"]} />}>
-          <Route path="/student/dashboard" element={<StudentDashboard />} />
-        </Route> */}
         <Route path="student" element={<RequireRole allowedRoles={["STUDENT"]} />}>
           <Route index element={<StudentDashboard />} />
           <Route path="dashboard" element={<StudentDashboard />} />
+          <Route path="view-job/:jobId" element={<JobDetails/>} />
+          <Route path="apply-job/:jobId" element={<Applyjob/>} />
         </Route>
 
         <Route path="recruiter" element={<RequireRole allowedRoles={["RECRUITER"]} />}>
