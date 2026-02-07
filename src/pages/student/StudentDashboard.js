@@ -25,7 +25,6 @@ const StudentDashboard = () => {
         setApplications(applicationApiResult?.data?.applications)
         setJobData(jobApiResult?.data?.jobs)
         setAppliedJobsData(appliedJobs?.data?.applications)
-        console.log(appliedJobs?.data?.applications)
 
       } catch (error) {
         console.log(error?.response?.data?.message)
