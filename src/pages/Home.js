@@ -100,7 +100,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ============= CTA SECTION ============= */}  // TODO: CTA section to be different if user is already logged in
+        {/* ============= CTA SECTION =============  \/\/ TODO: CTA section to be different if user is already logged in */}
         <section className="py-20 text-center">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
             Ready to Get Started?

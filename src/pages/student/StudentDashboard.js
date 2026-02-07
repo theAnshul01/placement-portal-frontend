@@ -51,9 +51,9 @@ const StudentDashboard = () => {
             </p>
           </div>
           <div className="flex flex-col items-center">
-            <button className="dark:bg-gray-800 bg-white p-3 rounded-full">
+            <Link to="profile" className="dark:bg-gray-800 bg-white p-3 rounded-full">
               <FaUserLarge className="text-gray-700 dark:text-gray-100 text-2xl" />
-            </button>
+            </Link>
             <p className="text-xs p-1 dark:text-gray-100">Profile</p>
           </div>
         </section>
@@ -83,7 +83,7 @@ const StudentDashboard = () => {
             <h1 className="text-gray-900 dark:text-gray-50 mb-2">Applied Jobs</h1>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
               {appliedJobsData.length === 0 ? <p className="text-gray-900 dark:text-gray-50 mb-2">No applied job drives with current open status.</p> :
-                appliedJobsData.map(item => <AppliedJobInfoCard key={item?.applicationId} company={item?.job?.companyName} title={item?.job?.title} ctc={item?.job?.CTC} status={item?.status} />
+                appliedJobsData.map(item => <AppliedJobInfoCard key={item?.applicationId} company={item?.job?.companyName} title={item?.job?.title} ctc={item?.job?.CTC} status={item?.status} applicationId={item?.applicationId}/>
                 )}
             </div>
           </div>
@@ -118,15 +118,18 @@ const JobInfoCard = ({ company, title, type, ctc, deadline }) => {
     </div>
   )
 }
-const AppliedJobInfoCard = ({ company, title, ctc, status }) => {
+const AppliedJobInfoCard = ({ company, title, ctc, status, applicationId}) => {
   return (
-    <div className="min-h-24 rounded-xl border bg-white shaodw-sm p-2 text-gray-600 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-200 flex flex-col justify-end">
+    <div className="min-h-24 rounded-xl border bg-white shaodw-sm p-2 text-gray-600 dark:bg-gray-700 dark:border-gray-500 dark:text-gray-200 flex flex-col justify-start">
       <p className="text-gray-900 dark:text-white mb-1 font-semibold">{company}</p>
       <div className="text-sm font-light">
       <p>Role: {title}</p>
       <p>CTC: {ctc}</p>
       <p>Current status: {status}</p>
       </div>
+      {(status === "APPLIED" || status === "SHORTLISTED" )&& 
+        <Link to={`withdraw-application/${applicationId}`} className="dark-btn btn text-sm mt-1 text-center">Withdraw Application</Link>
+      }
     </div>
   )
 }

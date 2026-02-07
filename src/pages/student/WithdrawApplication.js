@@ -1,17 +1,20 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
 import api from "../../api/api"
-import { useEffect, useState } from "react"
 import Navbar from "../../components/Navbar"
 
-const JobDetails = () => {
-    const { jobId } = useParams()
-    const [jobDetails, setJobDetails] = useState([])
+
+const WithdrawApplication = () => {
+    const { applicationId } = useParams()
+    const navigate = useNavigate()
+    const [appDetails, setAppDetails] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         const fetchJobs = async () => {
             try {
-                const response = await api.get("/jobs")
-                setJobDetails(response?.data?.jobs)
+                const response = await api.get("/api/student/applications")
+                setAppDetails(response?.data?.applications)
             } catch (error) {
                 console.log(error)
             }
@@ -19,15 +22,14 @@ const JobDetails = () => {
 
         fetchJobs()
     }, [])
-
-    const filteredJob = jobDetails?.find(job => job._id === jobId)
-
-    const branches = filteredJob?.eligibility?.branches
-    const cutOffCGPA = filteredJob?.eligibility?.minCgpa
+    
+    const filteredApp = appDetails?.find(application => application.applicationId === applicationId)
+    const job = filteredApp?.job
+    
 
     return (
-        <>  
-        <Navbar />
+        <>
+            <Navbar />
             <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-6 py-8">
                 <div className="max-w-4xl mx-auto">
 
@@ -37,10 +39,10 @@ const JobDetails = () => {
                         {/* Header */}
                         <div>
                             <h1 className="text-2xl font-semibold text-gray-900 dark:text-gray-100">
-                                {filteredJob?.companyName}
+                                {job?.companyName}
                             </h1>
                             <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-                                {filteredJob?.title}
+                                {job?.title}
                             </p>
                         </div>
 
@@ -49,20 +51,20 @@ const JobDetails = () => {
                             <div>
                                 <p className="text-gray-500 dark:text-gray-400">Job Type</p>
                                 <p className="text-gray-900 dark:text-gray-100">
-                                    {filteredJob?.jobType}
+                                    {job?.jobType}
                                 </p>
                             </div>
 
                             <div>
                                 <p className="text-gray-500 dark:text-gray-400">Location</p>
                                 <p className="text-gray-900 dark:text-gray-100">
-                                    {filteredJob?.location}
+                                    {job?.location}
                                 </p>
                             </div>
                             <div>
                                 <p className="text-gray-500 dark:text-gray-400">CTC</p>
                                 <p className="text-gray-900 dark:text-gray-100">
-                                    {filteredJob?.CTC}
+                                    {job?.CTC}
                                 </p>
                             </div>
 
@@ -71,71 +73,78 @@ const JobDetails = () => {
                                 <span
                                     className={`
                                     inline-block mt-1 px-3 py-1 text-xs font-medium rounded-full
-                                    ${filteredJob?.status === "ACTIVE"
+                                    ${job?.status === "ACTIVE"
                                             ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
                                             : "bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300"
                                         }
                                 `}
                                 >
-                                    {filteredJob?.status}
+                                    {job?.status}
                                 </span>
                             </div>
 
-                            <div>
-                                <p className="text-gray-500 dark:text-gray-400">Cut-off CGPA</p>
-                                <p className="text-gray-900 dark:text-gray-100">
-                                    {cutOffCGPA}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Description */}
-                        <div>
-                            <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                                Job Description
-                            </h2>
-                            <p className="mt-1 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                                {filteredJob?.description}
-                            </p>
-                        </div>
-
-                        {/* Eligibility */}
-                        <div>
-                            <h2 className="text-sm font-medium text-gray-900 dark:text-gray-100">
-                                Eligible Branches
-                            </h2>
-                            <div className="mt-2 flex flex-wrap gap-2">
-                                {branches?.map((branch, index) => (
-                                    <span
-                                        key={index}
-                                        className="px-3 py-1 text-xs rounded-full bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
-                                    >
-                                        {branch}
-                                    </span>
-                                ))}
-                            </div>
+                            
                         </div>
 
                         {/* Actions */}
                         <div className="pt-4 flex justify-end">
-                            <Link
-                                to={`/student/apply-job/${filteredJob?._id}`}
+                            <button
                                 className="
                                 px-5 py-2 text-sm font-medium rounded-md
                                 bg-sky-600 hover:bg-sky-700
                                 text-white transition
                                 focus:outline-none focus:ring-2 focus:ring-sky-500
                             "
+                                onClick={()=>setIsOpen(true)}
                             >
-                                Apply for Job
-                            </Link>
+                                Withdraw Application
+                            </button>
                         </div>
 
                     </section>
                 </div>
             </div>
+            {isOpen && 
+            <WithdrawConfirmationModal 
+            onClose={()=>setIsOpen(false)} 
+                withdraw={async () => {
+                    try {
+                        await api.patch(`/api/student/applications/${applicationId}/withdraw`)
+                        navigate("/student")
+                    } catch (error) {
+                        console.log(error)
+                    }
+                }}
+            />
+}
         </>
     )
 }
 
-export default JobDetails
+export default WithdrawApplication
+
+const WithdrawConfirmationModal = ({onClose, withdraw}) => {
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        withdraw()
+    }
+
+    return(
+        <>
+            <div className="fixed inset-0 z-50 flex items-center justify-center">
+
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose}/>
+
+            {/* Modal */}
+            <div className="relative px-4 py-6 rounded-xl shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-50 flex flex-col items-center justify-center space-y-3">
+                <p>Are you confirmed to withdraw the application?</p>
+                <p>There is no going back once withdrawn.</p>
+                <button className="border border-red-500 bg-red-100 dark:bg-red-700 text-red-800 dark:text-white btn" onClick={handleSubmit}>Withdraw Application</button>
+            </div>
+
+            </div>
+
+        </>
+    )
+}

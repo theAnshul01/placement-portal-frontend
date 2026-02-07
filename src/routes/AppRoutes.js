@@ -21,6 +21,8 @@ import PasswordResetEmail from "../pages/officer/PasswordResetEmail"
 import VerifyRecruiter from "../pages/officer/VerifyRecruiter"
 import Applyjob from "../pages/student/Applyjob"
 import JobDetails from "../pages/student/JobDetails"
+import StudentProfile from "../pages/student/StudentProfile"
+import WithdrawApplication from "../pages/student/WithdrawApplication"
 
 const AppRoutes = () => {
   return (
@@ -42,6 +44,8 @@ const AppRoutes = () => {
           <Route path="dashboard" element={<StudentDashboard />} />
           <Route path="view-job/:jobId" element={<JobDetails/>} />
           <Route path="apply-job/:jobId" element={<Applyjob/>} />
+          <Route path="profile" element={<StudentProfile/>} />
+          <Route path="withdraw-application/:applicationId" element={<WithdrawApplication/>}/>
         </Route>
 
         <Route path="recruiter" element={<RequireRole allowedRoles={["RECRUITER"]} />}>
