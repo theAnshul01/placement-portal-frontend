@@ -137,10 +137,10 @@ const WithdrawConfirmationModal = ({onClose, withdraw}) => {
             <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={onClose}/>
 
             {/* Modal */}
-            <div className="relative px-4 py-6 rounded-xl shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-50 flex flex-col items-center justify-center space-y-3">
-                <p>Are you confirmed to withdraw the application?</p>
+            <div className="relative px-4 py-6 rounded-xl shadow-sm bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-gray-50 flex flex-col items-center justify-center">
+                <p>Are you confirmed ?</p>
                 <p>There is no going back once withdrawn.</p>
-                <button className="border border-red-500 bg-red-100 dark:bg-red-700 text-red-800 dark:text-white btn" onClick={handleSubmit}>Withdraw Application</button>
+                <button className="mt-4 border border-red-500 bg-red-100 dark:bg-red-700 text-red-800 dark:text-white btn text-sm" onClick={handleSubmit}>Withdraw Application</button>
             </div>
 
             </div>

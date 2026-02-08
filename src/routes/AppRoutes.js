@@ -23,6 +23,12 @@ import Applyjob from "../pages/student/Applyjob"
 import JobDetails from "../pages/student/JobDetails"
 import StudentProfile from "../pages/student/StudentProfile"
 import WithdrawApplication from "../pages/student/WithdrawApplication"
+import AdminDashboard from "../pages/admin/AdminDashboard"
+import CreateOfficer from "../pages/admin/CreateOfficer"
+import OfficerPage from "../pages/admin/OfficerPage"
+import StudentPage from "../pages/admin/StudentPage"
+import StudentDetail from "../pages/admin/StudentDetail"
+import OfficerDetail from "../pages/admin/OfficerDetail"
 
 const AppRoutes = () => {
   return (
@@ -38,6 +44,15 @@ const AppRoutes = () => {
       <Route element={<RequireAuth />}>
 
         <Route path="/dashboard" element={<Dashboard/>}/>
+
+        <Route  path="admin" element={<RequireRole allowedRoles={["ADMIN"]} />}>
+          <Route index element={<AdminDashboard/>}/>
+          <Route path="create-officer" element={<CreateOfficer/>} />
+          <Route path="view-officers" element={<OfficerPage/>} />
+          <Route path="view-students" element={<StudentPage/>} />
+          <Route path="students/:userId" element={<StudentDetail/>} />
+          <Route path="officers/:userId" element={<OfficerDetail/>} />
+        </Route>
 
         <Route path="student" element={<RequireRole allowedRoles={["STUDENT"]} />}>
           <Route index element={<StudentDashboard />} />

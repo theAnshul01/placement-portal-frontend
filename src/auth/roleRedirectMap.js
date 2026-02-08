@@ -1,7 +1,8 @@
 export const roleRedirectMap = {
     STUDENT: "/student",
     RECRUITER: "/recruiter",
-    OFFICER: "/officer"
+    OFFICER: "/officer",
+    ADMIN: "/admin"
 }
 
 export const getRedirectPathByRole = (role) => {
