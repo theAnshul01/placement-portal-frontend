@@ -33,7 +33,7 @@ const OfficerDetail = () => {
             const payload = {
                 reason
             }
-            const response = await api.patch(`/api/admin/officers/${userId}/deactivate`, payload)
+            await api.patch(`/api/admin/officers/${userId}/deactivate`, payload)
             setReason("")
             setButton(prev => !prev)
         } catch (error) {
@@ -46,8 +46,7 @@ const OfficerDetail = () => {
             const payload = {
                 reason
             }
-            const response = await api.patch(`/api/admin/officers/${userId}/reactivate`, payload)
-            console.log(response)
+            await api.patch(`/api/admin/officers/${userId}/reactivate`, payload)
             setReason("")
             setButton(prev => !prev)
         } catch (error) {

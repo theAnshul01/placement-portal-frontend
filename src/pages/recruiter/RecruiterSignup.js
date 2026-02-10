@@ -39,6 +39,15 @@ const RecruiterSignup = () => {
         try {
             await api.post("/api/auth/recruiter/signup", recruiterSignupDetails)
             setSuccess("Sign up successful")
+            setFullName("")
+            setEmail("")
+            setPassword("")
+            setCompanyName("")
+            setRecruitingYear("")
+            setCompanyWebsite("")
+            setContactPerson("")
+            setContactEmail("")
+            setContactPhone("")
         } catch (error) {
             console.log("recruiter-signup error: ", error.stack)
             setError(error?.response?.data?.message || error?.message)
