@@ -23,12 +23,13 @@ const JobUpdate = () => {
     const [error, setError] = useState(null)
     const [success, setSuccess] = useState(null)
 
-    // 🔹 Fetch existing job details // TODO: create this endpoint in the backend
+    // 🔹 Fetch existing job details
     useEffect(() => {
         const fetchJob = async () => {
             try {
                 const res = await api.get(`/api/recruiter/jobs/${id}`)
-                const job = res.data
+                console.log(res.data)
+                const job = res.data.job
 
                 setForm({
                     title: job.title || "",

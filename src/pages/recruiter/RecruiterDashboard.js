@@ -22,7 +22,9 @@ const RecruiterDashboard = () => {
             </div>
             <div>
               {/* Profile icon */}
-              <button className="bg-gray-50 dark:bg-gray-700 rounded-full p-3">
+              <button className="bg-gray-50 dark:bg-gray-700 rounded-full p-3"
+                onClick={() => navigate("profile")}
+              >
                 <FaUserLarge className="text-gray-800 dark:text-gray-50 text-3xl" />
               </button>
             </div>

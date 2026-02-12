@@ -4,11 +4,13 @@ import { format } from "date-fns"
 import { FaRegPenToSquare } from "react-icons/fa6"
 import Navbar from "../../components/Navbar"
 import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 const ViewJobs = () => {
     const [jobs, setJobs] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchJobs = async () => {
@@ -149,8 +151,16 @@ const ViewJobs = () => {
                                 </p>
                             </div>
 
-                            <div className="mt-2">
-                                <Link to={`/recruiter/update-job/${job._id}`} className="text-gray-700 dark:text-gray-50"><FaRegPenToSquare /></Link>
+                            <div className="mt-2 flex items-center justify-between">
+                                <div className="flex items-center justify-evenly">
+                                    <Link to={`/recruiter/update-job/${job._id}`} className="text-gray-600 dark:text-gray-50 text-xl"><FaRegPenToSquare /></Link>
+                                    <p className="ml-1 text-sm text-gray-700 dark:text-gray-50">Edit</p>
+                                </div>
+                                <div>
+                                    <button className="rounded-3xl px-2 text-gray-800 dark:text-gray-50 bg-gray-50 dark:bg-gray-600"
+                                    onClick={() => navigate(`/recruiter/view-applications/${job._id}`)}
+                                    >See Applications</button>
+                                </div>
                             </div>
                         </div>
                     ))}

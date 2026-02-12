@@ -32,6 +32,8 @@ import OfficerDetail from "../pages/admin/OfficerDetail"
 import JobPost from "../pages/recruiter/JobPost"
 import ViewJobs from "../pages/recruiter/ViewJobs"
 import JobUpdate from "../pages/recruiter/JobUpdate"
+import ApplicationsPage from "../pages/recruiter/ApplicationsPage"
+import RecruiterProfile from "../pages/recruiter/RecruiterProfile"
 
 const AppRoutes = () => {
   return (
@@ -69,9 +71,11 @@ const AppRoutes = () => {
         <Route path="recruiter" element={<RequireRole allowedRoles={["RECRUITER"]} />}>
           <Route index element={<RecruiterDashboard />} />
           <Route path="dashboard" element={<RecruiterDashboard />} />
+          <Route path="profile" element={<RecruiterProfile/>}/>
           <Route path="post-job" element={<JobPost/>} />
           <Route path="view-jobs" element={<ViewJobs/>} />
           <Route path="update-job/:id" element={<JobUpdate/>} />
+          <Route path="view-applications/:jobId" element={<ApplicationsPage/>} />
         </Route>
 
         <Route path="officer" element={<RequireRole allowedRoles={["OFFICER"]} />}>
