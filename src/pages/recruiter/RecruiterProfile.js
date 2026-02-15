@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react'
 import api from "../../api/api"
 import Navbar from "../../components/Navbar"
+import { FaRegPenToSquare } from 'react-icons/fa6'
 
 const RecruiterProfile = () => {
 
     const [profile, setProfile] = useState({})
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
+    const [isEditOpen, setIsEditOpen] = useState(false)
+    const [editField, setEditField] = useState(null)
 
     useEffect(() => {
         const fetchProfile = async () => {
             try {
                 const response = await api.get("/api/recruiter/profile")
+                console.log(response.data.profile)
                 setProfile(response.data.profile)
             } catch (err) {
                 setError("Failed to load profile")
@@ -128,36 +132,98 @@ const RecruiterProfile = () => {
                             </h2>
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <ProfileField label="Contact Person" value={profile.contactPerson} />
-                                <ProfileField label="Contact Email" value={profile.contactEmail} />
-                                <ProfileField label="Contact Number" value={profile.contactNumber} />
+                                <ProfileField label="Contact Person" value={profile.contactPerson}
+                                    editable
+                                    onEdit={() => {
+                                        setEditField("Contact Person")
+                                        setIsEditOpen(true)
+                                    }}
+                                />
+                                <ProfileField label="Contact Email" value={profile.contactEmail}
+                                    editable
+                                    onEdit={() => {
+                                        setEditField("Contact Email")
+                                        setIsEditOpen(true)
+                                    }}
+                                />
+                                <ProfileField label="Contact Number" value={profile.contactNumber}
+                                    editable
+                                    onEdit={() => {
+                                        setEditField("Contact Number")
+                                        setIsEditOpen(true)
+                                    }}
+                                />
                             </div>
                         </section>
 
                     </div>
                 </div>
             </div>
+
+            {isEditOpen && (
+                <EditProfileModal
+                    field={editField}
+                    initialValue={
+                        editField === "Contact Person" 
+                        ? profile?.contactPerson
+                        : editField === "Contact Email" 
+                        ? profile?.contactEmail
+                        : profile?.contactNumber}
+                    onClose={() => setIsEditOpen(false)}
+                    onSave={async (value) => {
+                        try {
+                            const payload =
+                                editField === "Contact Person"
+                                    ? { contactPerson: value }
+                                    : editField === "Contact Email"
+                                        ? { contactEmail: value }
+                                        : { contactNumber: value }
+
+                            await api.patch("/api/recruiter/profile", payload)
+
+                            setProfile(prev => ({
+                                ...prev,
+                                ...payload
+                            }))
+
+                            setIsEditOpen(false)
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    }}
+                />
+            )}
         </>
     )
 }
 
 /* ---------------- Reusable Components ---------------- */
 
-const ProfileField = ({ label, value }) => (
-    <div>
-        <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
-            {label}
-        </label>
-        <div className="
+const ProfileField = ({ label, value, editable, onEdit }) => {
+    return (
+        <div>
+            <label className="block text-sm font-medium text-gray-500 dark:text-gray-400 mb-1">
+                {label}
+                {editable && (
+                    <button
+                        onClick={onEdit}
+                        className="hover:text-blue-600 dark:hover:text-blue-400 ml-2"
+                    >
+                        <FaRegPenToSquare />
+                    </button>
+                )}
+            </label>
+            <div className="
             px-4 py-2.5 rounded-md
             bg-gray-50 dark:bg-gray-800
             text-sm text-gray-800 dark:text-gray-200
             border border-gray-200 dark:border-gray-700
         ">
-            {value || "—"}
+                {value || "—"}
+            </div>
         </div>
-    </div>
-)
+    )
+}
 
 const StatusBadge = ({ label, value, color }) => {
 
@@ -181,3 +247,85 @@ const StatusBadge = ({ label, value, color }) => {
 }
 
 export default RecruiterProfile
+
+const EditProfileModal = ({
+    field,
+    initialValue,
+    onClose,
+    onSave
+}) => {
+    const [value, setValue] = useState(initialValue)
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        onSave(value)
+    }
+
+    return (
+        <>
+            <div className='fixed inset-0 z-50 flex items-center justify-center'>
+
+                {/* Backdrop */}
+                <div className='absolute inset-0 bg-black/40 backdrop-blur-sm' onClick={onClose} />
+
+                    {/* Modal */}
+                    <div className='relative w-full max-w-md bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6'>
+                        <h2 className='text-xl font-semibold mb-4 text-gray-900 dark:text-gray-100'>
+                            Edit {field === "Contact Person"
+                                ? "Contact Person"
+                                : field === "Contact Email"
+                                    ? "Contact Email"
+                                    : "Contact Number"}
+                        </h2>
+                        <form className='space-y-4' onSubmit={handleSubmit}>
+                            {field === "Contact Person" && (
+                                <input
+                                    type="text"
+                                    value={value}
+                                    onChange={(e) => setValue(e.target.value)}
+                                    className='w-full px-4 py-2 border rounded-md bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100'
+                                    required
+                                />
+                            )}
+                            {field === "Contact Email" && (
+                                <input
+                                    type="email"
+                                    value={value}
+                                    onChange={(e) => setValue(e.target.value)}
+                                    className='w-full px-4 py-2 border rounded-md bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100'
+                                    required
+                                />
+                            )}
+                            {field === "Contact Number" && (
+                                <input
+                                    type="text"
+                                    value={value}
+                                    onChange={(e) => setValue(e.target.value)}
+                                    className='w-full px-4 py-2 border rounded-md bg-gray-50 dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100'
+                                />
+                            )}
+                            <div className="flex justify-end gap-3 pt-4">
+                                <button
+                                    type="button"
+                                    onClick={onClose}
+                                    className="px-4 py-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+                                >
+                                    Cancel
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    className="px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700"
+                                >
+                                    Save
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                
+
+            </div>
+        </>
+    )
+}
