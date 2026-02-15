@@ -15,7 +15,6 @@ const RecruiterProfile = () => {
         const fetchProfile = async () => {
             try {
                 const response = await api.get("/api/recruiter/profile")
-                console.log(response.data.profile)
                 setProfile(response.data.profile)
             } catch (err) {
                 setError("Failed to load profile")
