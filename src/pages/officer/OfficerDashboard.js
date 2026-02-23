@@ -47,12 +47,25 @@ const OfficerDashboard = () => {
     ) || []
   )
 
-  const today = new Date().toDateString()
+  const now = new Date()
+
+  const startOfDay = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate()
+  )
+
+  const endOfDay = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate() + 1
+  )
 
   let jobsContent = (
     jobDrives?.jobs?.filter(job => {
       const deadline = new Date(job.deadline)
-      return deadline.toDateString() === today
+      // console.log(deadline)
+      return deadline >= startOfDay && deadline < endOfDay
     }) || []
   )
 
@@ -124,7 +137,7 @@ const OfficerDashboard = () => {
                   View All Jobs
                 </button>
 
-                <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900">
+                <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900" onClick={() => navigate("branch-stats")}>
                   Placement Statistics  {/* \/\/ TODO: to link with the admin view of placement stats */}
                 </button>
                 <button className="w-full rounded-lg border px-4 py-2 text-sm hover:bg-gray-50 dark:text-gray-100 dark:border-gray-600 dark:hover:bg-gray-300 dark:hover:text-gray-900" onClick={() => navigate("create-student-account")}>

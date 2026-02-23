@@ -34,6 +34,7 @@ import ViewJobs from "../pages/recruiter/ViewJobs"
 import JobUpdate from "../pages/recruiter/JobUpdate"
 import ApplicationsPage from "../pages/recruiter/ApplicationsPage"
 import RecruiterProfile from "../pages/recruiter/RecruiterProfile"
+import BranchStatistics from "../pages/officer/BranchStatistics"
 
 const AppRoutes = () => {
   return (
@@ -91,6 +92,7 @@ const AppRoutes = () => {
           <Route path="recruiter-verification" element={<RecruiterList/>} />
           <Route path="password-reset-email" element={<PasswordResetEmail/>} />
           <Route path="verify-recruiter" element={<VerifyRecruiter/>} />
+          <Route path="branch-stats" element={<BranchStatistics />} />
         </Route>
 
       </Route>

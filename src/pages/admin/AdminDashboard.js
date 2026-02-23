@@ -44,7 +44,9 @@ const AdminDashboard = () => {
                                     <StatCard label="Placed Students" value={stats?.students?.placed} />
                                 </div>
                             </div>
-                            <p className="p-3 text-blue-600 text-sm hover:underline dark:text-blue-500 inline-block hover:translate-x-1">View more &rarr;</p>
+                            <p className="p-3 text-blue-600 text-sm hover:underline dark:text-blue-500 inline-block hover:translate-x-1 cursor-pointer" 
+                            onClick={() => navigate("/officer/branch-stats")}
+                            >View more &rarr;</p>
 
                         </div>
                         {/* Quick Actions */}
