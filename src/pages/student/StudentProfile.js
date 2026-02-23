@@ -1,7 +1,10 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { Link } from "react-router-dom"
 import api from "../../api/api"
 import Navbar from "../../components/Navbar"
 import { FaRegPenToSquare } from "react-icons/fa6";
+import { MdDeleteOutline } from "react-icons/md"
+import { IoCloudUploadOutline } from "react-icons/io5"
 
 const StudentProfile = () => {
 
@@ -11,19 +14,21 @@ const StudentProfile = () => {
     const [isEditOpen, setIsEditOpen] = useState(false)
     const [editField, setEditField] = useState(null)
 
-    useEffect(() => {
-        const fetchProfile = async () => {
-            try {
-                const response = await api.get("/api/student/profile")
-                setUserProfile(response?.data?.profile)
-                setSkills(response?.data?.profile?.skills)
-            } catch (error) {
-                console.log(error)
-            } finally {
-                setLoading(false)
-            }
+    const fetchProfile = async () => {
+        try {
+            const response = await api.get("/api/student/profile")
+            console.log(response.data.profile)
+            setUserProfile(response?.data?.profile)
+            setSkills(response?.data?.profile?.skills)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false)
         }
+    }
 
+
+    useEffect(() => {
         fetchProfile()
     }, [])
 
@@ -39,8 +44,8 @@ const StudentProfile = () => {
     }
 
     return (
-        <>  
-        <Navbar />
+        <>
+            <Navbar />
             <div className="min-h-screen px-6 py-10 bg-gray-50 dark:bg-gray-900">
 
                 <div className="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-xl shadow-md dark:shadow-none border border-gray-200 dark:border-gray-700 p-8">
@@ -58,11 +63,11 @@ const StudentProfile = () => {
                         <ProfileItem label="Role" value={userProfile?.role} />
                         <ProfileItem label="Roll Number" value={userProfile?.rollNumber} />
                         <ProfileItem label="Branch" value={userProfile?.branch} />
-                        <ProfileItem 
-                            label="CGPA" 
-                            value={userProfile?.cgpa?.toFixed(2)} 
+                        <ProfileItem
+                            label="CGPA"
+                            value={userProfile?.cgpa?.toFixed(2)}
                             editable
-                            onEdit={()=>{
+                            onEdit={() => {
                                 setEditField("cgpa")
                                 setIsEditOpen(true)
                             }}
@@ -76,6 +81,14 @@ const StudentProfile = () => {
                                 setIsEditOpen(true)
                             }}
                         />
+
+                        <ProfileItem
+                            label="Resume"
+                            value={userProfile?.resume?.url}
+                            onResumeUpload = {fetchProfile}
+                            onResumeDelete = {fetchProfile}
+                        />
+
                         <ProfileItem
                             label="Verification Status"
                             value={userProfile?.verificationStatus}
@@ -85,13 +98,13 @@ const StudentProfile = () => {
                             value={userProfile?.isActive ? "Active" : "Inactive"}
                             highlight={userProfile?.isActive}
                         />
-                        
+
                         <ProfileItem
                             label="Placement Status"
                             value={userProfile?.isPlaced ? "Placed" : "Not placed yet"}
                             highlight={userProfile?.isPlaced}
                         />
-                        
+
 
                     </div>
                 </div>
@@ -114,7 +127,7 @@ const StudentProfile = () => {
                                     : { skills: value.split(",").map(s => s.trim()) }
 
                             await api.patch("/api/student/profile", payload)
-                            
+
                             setUserProfile(prev => ({
                                 ...prev,
                                 ...payload
@@ -136,7 +149,7 @@ const StudentProfile = () => {
 }
 
 /* ===== Reusable field component ===== */
-const ProfileItem = ({ label, value, highlight, editable, onEdit }) => {
+const ProfileItem = ({ label, value, highlight, editable, onEdit, onResumeUpload, onResumeDelete }) => {
 
     const baseText =
         "mt-1 text-base font-semibold"
@@ -148,6 +161,16 @@ const ProfileItem = ({ label, value, highlight, editable, onEdit }) => {
                 ? "text-green-600 dark:text-green-400"
                 : "text-red-600 dark:text-red-400"
 
+    const deleteResume = async () => {
+        try {
+            const response = await api.delete("/api/student/profile/resume")
+            console.log(response?.data?.message)
+            onResumeDelete && onResumeDelete()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div>
             <p className="text-sm font-medium
@@ -158,13 +181,26 @@ const ProfileItem = ({ label, value, highlight, editable, onEdit }) => {
                         onClick={onEdit}
                         className="hover:text-blue-600 dark:hover:text-blue-400"
                     >
-                        <FaRegPenToSquare/>
+                        <FaRegPenToSquare />
                     </button>
                 )}
+
             </p>
-            <p className={`${baseText} ${colorClass}`}>
-                {value || "-"}
+            <p className="flex flex-row items-center gap-3">
+                {label === "Resume" && value && <Link className={`${baseText} ${colorClass}`} to={value}>📄 View Resume</Link>}
+                {label === "Resume" && value && <MdDeleteOutline onClick={deleteResume} className="text-xl dark:text-gray-300 text-gray-600 cursor-pointer" />}
+                {label === "Resume" && !value && <ResumeUploadItem 
+                    onUploadSuccess={()=>{
+                        onResumeUpload && onResumeUpload()
+                    }}
+                />}
+                {label !== "Resume" &&
+                    <p className={`${baseText} ${colorClass}`}>
+                        {value || "-"}
+                    </p>
+                }
             </p>
+
         </div>
     )
 }
@@ -242,5 +278,90 @@ const EditProfileModal = ({
                 </form>
             </div>
         </div>
+    )
+}
+
+const ResumeUploadItem = ({onUploadSuccess}) => {
+    const [file, setFile] = useState(null)
+    const [uploading, setUploading] = useState(false)
+    const inputRef = useRef(null)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        if (!file) return alert("Please select a file")
+
+        const formData = new FormData()
+        formData.append("resume", file)
+
+        try {
+            setUploading(true)
+            const response = await api.post("/api/student/profile/resume", formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
+            )
+            console.log(response.data.message)
+            onUploadSuccess && onUploadSuccess()
+            setFile(null)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setUploading(false)
+        }
+    }
+
+    return (
+        <>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="pdf-upload" className="flex flex-col items-center border border-dashed border-gray-400 dark:border-gray-300
+                rounded-lg p-1 cursor-pointer hover:bg-gray-300/40 dark:hover:bg-gray-500/40 transition">
+                    <IoCloudUploadOutline className="text-2xl dark:text-gray-300" />
+                    <span className="text-sm font-medium dark:text-gray-300">
+                        {file ? "Change resume file" : "Click to upload resume"}
+                    </span>
+                    <span className="text-xs text-gray-500 mt-1 dark:text-gray-300">
+                        Only .pdf files are allowed.
+                    </span>
+                    <input
+                        type="file"
+                        accept=".pdf"
+                        id="pdf-upload"
+                        className="hidden"
+                        onChange={(e) => setFile(e.target.files[0])}
+                        ref={inputRef}
+                    />
+                </label>
+                {/* selected file info */}
+                {file && (
+                    <div className="text-sm dark:text-gray-300 ">
+                        <span className="truncate">
+                            📄 {file.name}
+                        </span>
+                        <button
+                            onClick={() => {
+                                setFile(null)
+                                if (inputRef.current) {
+                                    inputRef.current.value = ""
+                                }
+                            }
+                            }
+                            className=" mt-1 ml-2 underline"
+                        >
+                            clear
+                        </button>
+                    </div>
+                )}
+                <button
+                    type="submit"
+                    disabled={uploading}
+                    className="text-sm dark-btn p-1 rounded-md mt-1"
+                >
+                    {uploading ? "Uploading..." : "Upload Resume"}
+                </button>
+            </form>
+        </>
     )
 }
