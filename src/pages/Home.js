@@ -2,6 +2,7 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import { Link } from "react-router-dom"
 import useAuth from "../auth/useAuth"
+import RecruitersMarquee from "./RecruitersMarquee"
 
 const Home = () => {
   const {user} = useAuth()
@@ -15,16 +16,16 @@ const Home = () => {
       <main className="min-h-screen bg-gray-50 dark:bg-gray-900">
 
         {/* ========= HERO SECTION ========== */}
-        <section className="max-w-7xl mx-auto px-6 py-24 text-center ">
+        <section className="max-w-7xl mx-auto px-6 pt-24 pb-4 text-center ">
 
           {/* Main heading */}
-          <h1 className="text-5xl font-extrabold text-gray-900 leading-tight dark:text-gray-100">One Platform for {" "}
-            <span className="text-blue-600 dark:text-blue-400">Campus Placements</span>
+          <h1 className="text-5xl font-extrabold text-gray-900 leading-tight dark:text-gray-100 ">Building Career. {" "}
+            <span className="text-blue-600 dark:text-blue-400">Shaping Futures.</span>
           </h1>
 
           {/* Subtitle text */}
           <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto dark:text-gray-300">
-            Built for students, recruiters & placement cell. Browse drives, apply with one click, track progress through the journey, and keep everyone aligned-from students to recruiters to administrators.
+            Connecting the bright minds from SVNIT Surat with the world's leading organization through structured placement, internships and best career development programs.
           </p>
 
           {/* CTA container */}
@@ -38,13 +39,6 @@ const Home = () => {
               Login to Portal
             </Link>}
 
-            {/* Secondary CTA button */}
-            <Link
-              to="#features"
-              className="px-6 py-3 rounded-md border-gray-300 text-gray-700 bg-gray-200 hover:bg-gray-300 transition dark:bg-gray-300"
-            >
-              Learn More
-            </Link>
           </div>
         </section>
 
@@ -100,24 +94,7 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ============= CTA SECTION =============  \/\/ TODO: CTA section to be different if user is already logged in */}
-        <section className="py-20 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-gray-50">
-            Ready to Get Started?
-          </h2>
-          <p className="mt-4 text-gray-600 dark:text-gray-300">
-            Login and manage your placement journey
-          </p>
-
-          <div className="mt-6">
-            <Link
-              to="/login"
-              className="px-6 py-3 rounded-md  font-medium dark-btn transition"
-            >
-              Go to Login
-            </Link>
-          </div>
-        </section>
+        <RecruitersMarquee/>
 
       </main>
 
