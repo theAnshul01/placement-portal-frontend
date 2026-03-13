@@ -14,17 +14,17 @@ const Footer = () => {
 
             {/* Right section */}
             <div className='flex gap-6 text-sm text-gray-600 dark:text-gray-200'>
-                  <Link to="" className="hover:text-gray-900 hover:underline transition dark:hover:text-white">
+                  <Link to="/coming-soon" className="hover:text-gray-900 hover:underline transition dark:hover:text-white">
                       Privacy Policy
                   </Link>
 
                   {/* Footer link */}
-                  <Link to="" className="hover:text-gray-900 hover:underline transition dark:hover:text-white">
+                  <Link to="/coming-soon" className="hover:text-gray-900 hover:underline transition dark:hover:text-white">
                       Terms of Service
                   </Link>
 
                   {/* Footer link */}
-                  <Link to="" className="hover:text-gray-900 hover:underline transition dark:hover:text-white">
+                  <Link to="/coming-soon" className="hover:text-gray-900 hover:underline transition dark:hover:text-white">
                       Contact
                   </Link>
             </div>

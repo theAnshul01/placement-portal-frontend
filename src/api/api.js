@@ -3,7 +3,7 @@ import { getToken, setToken, clearToken } from '../auth/tokenStore'
 import { notifySessionExpired } from '../context/SessionContext'
 
 const api = axios.create({
-    baseURL: "http://localhost:3500",
+    baseURL: "https://placement-portal-backend-udkb.onrender.com",
     withCredentials: true
 })
 
