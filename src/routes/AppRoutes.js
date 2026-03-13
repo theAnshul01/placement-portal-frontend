@@ -36,6 +36,7 @@ import ApplicationsPage from "../pages/recruiter/ApplicationsPage"
 import RecruiterProfile from "../pages/recruiter/RecruiterProfile"
 import BranchStatistics from "../pages/officer/BranchStatistics"
 import ResetPassword from "../pages/student/ResetPassword"
+import ComingSoon from "../pages/ComingSoon"
 
 const AppRoutes = () => {
   return (
@@ -47,6 +48,7 @@ const AppRoutes = () => {
       <Route path="/loginpolicy" element={<LoginPolicy />} />
       <Route path="/recruiter-registration" element={<RecruiterSignup/>} />
       <Route path="/reset-password" element={<ResetPassword/>}/>
+      <Route path="/coming-soon" element={<ComingSoon/>} />
 
       {/* Protected Routes */}
       <Route element={<RequireAuth />}>

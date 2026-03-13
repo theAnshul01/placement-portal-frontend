@@ -25,7 +25,7 @@ const Home = () => {
 
           {/* Subtitle text */}
           <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto dark:text-gray-300">
-            Connecting the bright minds from SVNIT Surat with the world's leading organization through structured placement, internships and best career development programs.
+            Connecting the bright minds from University X with the world's leading organization through structured placement, internships and best career development programs.
           </p>
 
           {/* CTA container */}
